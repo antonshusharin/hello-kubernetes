@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-backend
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: hello
+      tier: backend
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: backend
+    spec:
+      containers:
+      - name: hello-backend
+        image: hello_kubernetes/backend
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 5000
+        env:
+          - name: POD_ID
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.uid
+

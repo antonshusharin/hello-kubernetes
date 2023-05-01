@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-frontend
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: frontend
+    spec:
+      containers:
+      - name: hello-frontend
+        image: hello_kubernetes/frontend
+        imagePullPolicy: Never
+        ports:
+        - containerPort: 8000
